@@ -1,8 +1,10 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session"/>    
 <%
 	String pid=productDAO.getProductSeq();
+    List<String> catelist = productDAO.getCategories();
 %>    
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8"><title>Insert title here</title>
@@ -58,8 +60,14 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css"
 <div class="form-group row">
    <label class="col-sm-2">분류</label>
    <div class="col-sm-3">
-   		<input type="text" name="category" 
-   		 id="category" class="form-control" required>
+   <select name="category" class="form-control" id="category">
+   <%
+    for(int i=0;i<catelist.size();i++){
+  out.print("<option value='"+catelist.get(i)+"'>"
+              +catelist.get(i)+"</option>");
+    }
+    %>
+   </select>
    </div>
 </div>
 
