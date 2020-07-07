@@ -96,4 +96,11 @@ public void inputFile() {
 	}catch(Exception e) {System.out.println(e.getMessage());}
 }
 
+public String getProductSeq() {
+ String seq=listOfProduct.get(listOfProduct.size()-1)
+		    .getProductId().substring(1);//P1234
+ int iSeq=Integer.parseInt(seq)+1;
+ return "P"+iSeq;
+}
+
 }

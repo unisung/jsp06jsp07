@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session"/>    
+<%
+	String pid=productDAO.getProductSeq();
+%>    
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8"><title>Insert title here</title>
 <!-- <link rel="stylesheet"
@@ -21,7 +25,8 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css"
 <div class="form-group row">
    <label class="col-sm-2">상품 코드</label>
    <div class="col-sm-3">
-   		<input type="text" name="productId" id="productId" class="form-control">
+   		<input type="text" name="productId" id="productId" class="form-control"
+   		  value="<%=pid %>" readonly>
    </div>
 </div>
 <div class="form-group row">
