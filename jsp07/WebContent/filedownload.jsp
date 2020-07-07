@@ -55,7 +55,7 @@
 	       +new String(orgfilename.getBytes("KSC5601"),"ISO8859_1"));
 	  }else{
 		  //한글 파일명 처리
-orgfilename=new String(orgfilename.getBytes("UTF-8"),"ISO8859_1");
+orgfilename=new String(orgfilename.getBytes("euc-kr"),"ISO8859_1");
    response.setHeader("Content-Disposition","attachment; filename=\""+orgfilename+"\"");	
    response.setHeader("Content-Type","application/octet-stream; charset=utf-8");
 	  }
@@ -63,7 +63,7 @@ orgfilename=new String(orgfilename.getBytes("UTF-8"),"ISO8859_1");
    response.setHeader("Content-Length",""+file.length());
    //이 응답을 위해 getOutputStream()이 이미 호출되었습니다. 오류처리
    out.clear();//buffer삭제
-   pageContext.pushBody();//body부분 밀어내기
+   out=pageContext.pushBody();//body부분 밀어내기
    
    os=response.getOutputStream();//out객체 다시 호출
    
@@ -84,6 +84,5 @@ out.println("<script>alert('파일을 찾을 수 없습니다.');history.back();
 	 e.printStackTrace();
  }
 %>
-
 </body>
 </html>
