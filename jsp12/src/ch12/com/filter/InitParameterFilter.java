@@ -34,10 +34,13 @@ public class InitParameterFilter implements Filter {
     
     String id=request.getParameter("id");
     String passwd=request.getParameter("passwd");
+    
     //init()메소드에서 얻은 초기화 정보를 파라미터명으로 얻기
     //getInitParameter(파라미터명);
     String param1=filterConfig.getInitParameter("param1");
     String param2=filterConfig.getInitParameter("param2");
+    System.out.println("param1:"+param1);
+    System.out.println("param2:"+param2);
     
     String message;
     
