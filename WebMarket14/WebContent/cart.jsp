@@ -1,5 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="dto.Product"%>
+<%@page import="java.util.ArrayList"%><%@page import="dto.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,13 +8,17 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <script>
-function change(){
-	var id=document.getElementById("id").value;
+function change(seq){
+	var id=document.getElementById("id"+seq).value;
 	    id=id.substring(0,id.indexOf("-"));
-	var qty = document.getElementById("qty").value;
+	var qty = document.getElementById("qty"+seq).value;
 	alert(id);
 	var yesno=confirm("수정하시겠습니까?");
 	if(yesno) location.href="changeCart.jsp?id="+id+"&qty="+qty;
+}
+function k(seq){
+	var btn=document.getElementById("btn"+seq);
+	btn.disabled="";
 }
 </script>
 </head>
@@ -59,11 +62,19 @@ function change(){
     	 sum=sum +total;//sum(총금액) =개별상품의 가격 합.
     %>
     <tr>
-    <td><input type="text" value="<%=product.getProductId()%>-<%=product.getPname()%>" id="id"></td>
+    <td><input type="text" 
+         value="<%=product.getProductId()%>-<%=product.getPname()%>" 
+         id="id<%=i%>">
+    </td>
     <td><%=product.getUnitPrice()%></td>
-    <td><input type="number" id="qty" value="<%=product.getQuantity()%>">
+    <td><input type="number" id="qty<%=i%>" 
+              value="<%=product.getQuantity()%>" 
+               onchange="k(<%=i%>)">
         <input type="button" class="btn btn-primary" 
-               onclick="change()" value="수정"/></td>
+               onclick="change(<%=i%>)" value="수정" 
+               id="btn<%=i%>"
+               disabled="disabled"/>
+    </td>
     <td><%=total%></td>
     <td><a href="./removeCart.jsp?id=<%=product.getProductId()%>" 
                class="badge badge-danger">삭제</a></td>
