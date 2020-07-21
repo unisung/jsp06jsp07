@@ -77,7 +77,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css"
    <div class="col-sm-3">
    <select name="category" class="form-control" id="category">
    <%
-       sql="select distinct p_category from product";
+       sql="select categoryName from category order by seq";
        pstmt=con.prepareStatement(sql);
        rs=pstmt.executeQuery();
    %>

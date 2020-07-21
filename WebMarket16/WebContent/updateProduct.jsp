@@ -16,6 +16,10 @@
 	pstmt.setString(1,p_id);
 	ResultSet rs=pstmt.executeQuery();
 	rs.next();
+	//category 값 저장
+	String category=rs.getString("p_category");
+	//상품상태 값 저장
+	String condition=rs.getString("p_condition");
 %>
 
 <fmt:setLocale value='<%=request.getParameter("language") %>'/>
@@ -36,7 +40,7 @@
      class="btn btn-sm btn-success pull-right">logout</a>
 </div>
 
-<form name="newProduct" action="./processAddProduct.jsp"
+<form name="newProduct" action="./processUpdateProduct.jsp"
   	 class="form-horizontal" method="post" enctype="multipart/form-data">
 <div class="form-group row">
    <label class="col-sm-2"><fmt:message key="productId"/></label>
@@ -74,26 +78,29 @@
 <div class="form-group row">
    <label class="col-sm-2"><fmt:message key="category"/></label>
    <div class="col-sm-3">
-   <%-- <select name="category" class="form-control" id="category">
+   <select name="category" class="form-control" id="category">
    <%
-       sql="select distinct p_category from product";
-       pstmt=con.prepareStatement(sql);
-       rs=pstmt.executeQuery();
+       String sql2="select categoryName from category order by seq";
+       PreparedStatement pstmt2=con.prepareStatement(sql2);
+       ResultSet rs2=pstmt2.executeQuery();
    %>
    <%
-    while(rs.next()){
-    out.print("<option value='"+rs.getString(1)+"'>"
-              +rs.getString(1)+"</option>");
+    while(rs2.next()){
+    out.print("<option value='"+rs2.getString(1)+"' "+
+              (rs2.getString(1).equals(category)?"selected":"") 
+    		
+    		+" >"
+              +rs2.getString(1)+"</option>");
     }
     %>
-   </select> --%>
+   </select>
    </div>
 </div>
-<%-- <%
-    if(rs!=null)rs.close();
-	if(pstmt!=null) pstmt.close();
-    if(con!=null) con.close();
-%> --%>
+<%
+    if(rs2!=null)rs2.close();
+	if(pstmt2!=null) pstmt2.close();
+   // if(con2!=null) con2.close();
+%>
 <div class="form-group row">
    <label class="col-sm-2"><fmt:message key="unitsInStock"/></label>
    <div class="col-sm-3">
@@ -107,11 +114,11 @@
    <label class="col-sm-2"><fmt:message key="condition"/></label>
    <div class="col-sm-5">
    	<input type="radio" name="condition" 
-   	     value="New" checked><fmt:message key="condition_New"/>
+   	     value="New" <%=condition.equals("New")?"checked":""%>><fmt:message key="condition_New"/>
    	<input type="radio" name="condition" 
-   	     value="Old"><fmt:message key="condition_Old"/>
+   	     value="Old" <%=condition.equals("Old")?"checked":""%>><fmt:message key="condition_Old"/>
    	<input type="radio" name="condition" 
-  value="Refurbished"><fmt:message key="condition_Refurbished"/>
+  value="Refurbished" <%=condition.equals("Refurbished")?"checked":""%>><fmt:message key="condition_Refurbished"/>
    </div>
 </div>
 <div class="form-group row">
@@ -127,5 +134,10 @@
 </div>
 </form>
 </div>
+<%
+    if(rs!=null)rs.close();
+	if(pstmt!=null) pstmt.close();
+    if(con!=null) con.close();
+%>
 <jsp:include page="footer.jsp"/>
 </fmt:bundle>
