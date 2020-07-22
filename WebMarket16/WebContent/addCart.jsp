@@ -1,9 +1,6 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="dto.Product"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.sql.ResultSet"%><%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.List"%><%@page import="java.util.ArrayList"%>
+<%@page import="dto.Product"%><%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="dbconn.jsp" %>
 <%
     //파라미터로 넘어온 id값으로
@@ -69,8 +66,6 @@
 
     //상세페이지로 이동시 원래 상품 정보출력
     response.sendRedirect("product.jsp?id="+id);
-
-    
 %>
 
 

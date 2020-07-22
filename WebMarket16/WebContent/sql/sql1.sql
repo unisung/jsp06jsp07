@@ -21,4 +21,32 @@ insert into category(categoryName,description) values('Tablet','Tablet');
 
 select categoryName from category order by seq;
 
+/*배송테이블*/
+create table sale(
+seq int not null auto_increment,
+saledate varchar(20),
+sessionId varchar(50),
+productId varchar(20),
+unitprice int,
+saleqty   int,
+primary key(seq)
+) default charset=utf8;
+
+/*주문테이블*/
+create table delivery(
+seq int not null auto_increment,
+sessionId varchar(50),
+name varchar(20),
+deliverydate varchar(20),
+nation varchar(20),
+zipcode varchar(5),
+address varchar(200),
+primary key(seq)
+) default charset=utf8;
+
+
+select * from sale;
+select * from delivery;
+
+
 

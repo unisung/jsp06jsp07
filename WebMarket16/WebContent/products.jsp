@@ -19,7 +19,6 @@
    String sql="select * from product order by p_id";
    PreparedStatement pstmt=con.prepareStatement(sql);
    ResultSet rs=pstmt.executeQuery();
-   
 %>
 <div class="container">
  <div class="row" align="center">
