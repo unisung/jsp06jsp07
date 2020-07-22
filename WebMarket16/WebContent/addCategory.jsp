@@ -15,13 +15,13 @@
 
 <form action="processAddCategory.jsp" method="post" class="form-horizontal">
  <div class="form-group row">
-   <label class="col-sm-2">카테고리명</label>
+   <label class="col-sm-3">카테고리명</label>
    <div class="col-sm-3">
    		<input type="text" name="categoryName" id="categoryName" class="form-control">
    </div>
 </div>
 <div class="form-group row">
-   <label class="col-sm-2">카테고리설명</label>
+   <label class="col-sm-3">카테고리설명</label>
    <div class="col-sm-3">
    		<input type="text" name="description" id="description" class="form-control">
    </div>
