@@ -49,15 +49,22 @@
     	session.setAttribute("cartlist", list);
     }else{
     	System.out.println("세션에 cartlist정보가 있음");
-    	
+    	int count=0;//카트리스트에 해당상품 존재확인 플래그용 변수
     	for(int i=0;i<list.size();i++){
     	if(list.get(i).getProductId().equals(id)){
+    		count++;
     		System.out.println("기존수량:"+list.get(i).getQuantity());
+    		//기존수량 +1;
     		int orderQuantity=list.get(i).getQuantity()+1;//장바구니수량 증가
     		list.get(i).setQuantity(orderQuantity);
+    	 }
+    	}
+    	//cartlist에 해당상품이 없을 때
+    	if(count==0){
+    	  product.setQuantity(1);//수량 설정 후 
+    	  list.add(product);//카트리스트에 저장
     	}
     	session.setAttribute("cartlist", list);
-    }
    }
 
     //상세페이지로 이동시 원래 상품 정보출력
