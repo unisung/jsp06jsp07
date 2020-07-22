@@ -30,6 +30,10 @@
     	}
     }
 %>
+<%
+   //오늘의 과제
+   //sale테이블, delivery테이블에 저장,날짜 2020/07/22
+%>
 <jsp:include page="menu.jsp"/>
 <div class="jumbotron">
 	<div class="container">
