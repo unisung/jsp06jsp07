@@ -14,3 +14,4 @@ try {
 	out.print("데이터베이스 연결이 실패되었습니다.<br>");
 	out.print("SQLException:"+e.getMessage());
 }
+%>
