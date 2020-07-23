@@ -10,4 +10,4 @@ insert into member values('1','1234','홍길동');
 insert into member values('2','1234','일지매');
 
 /* 데이타 조회*/
-select * from member;
+select * from member order by id desc;
