@@ -13,4 +13,6 @@
    session.invalidate();
    //삭제된 화면으로 이동.
    response.sendRedirect("cart.jsp");
+
+   
 %>

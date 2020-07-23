@@ -21,7 +21,7 @@ insert into category(categoryName,description) values('Tablet','Tablet');
 
 select categoryName from category order by seq;
 
-/*배송테이블*/
+/*주문테이블*/
 create table sale(
 seq int not null auto_increment,
 saledate varchar(20),
@@ -32,7 +32,7 @@ saleqty   int,
 primary key(seq)
 ) default charset=utf8;
 
-/*주문테이블*/
+/*배송테이블*/
 create table delivery(
 seq int not null auto_increment,
 sessionId varchar(50),
@@ -47,6 +47,10 @@ primary key(seq)
 
 select * from sale;
 select * from delivery;
+
+select * 
+  from sale s, delivery d
+ where s.sessionId=d.sessionId;
 
 
 

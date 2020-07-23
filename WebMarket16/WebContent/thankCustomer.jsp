@@ -1,3 +1,8 @@
+<%@page import="dto.Product"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -17,20 +22,74 @@
     
     Cookie[] cookies = request.getCookies();
     
-    if(cookies!=null){
-    	for(int i=0;i<cookies.length;i++){
-    		Cookie thisCookie=cookies[i];
-    		String n=thisCookie.getName();
-    		if(n.equals("Shipping_cartId"))
-    		shipping_cartId
-    		  =URLDecoder.decode((thisCookie.getValue()),"utf-8");
-    		if(n.equals("Shipping_shippingDate"))
-    		 shipping_shippingDate
-    		  =URLDecoder.decode((thisCookie.getValue()),"utf-8");
-    	}
+    if(cookies !=null){
+ 	   for(int i=0;i<cookies.length;i++){
+ 		   Cookie thisCookie = cookies[i];
+ 		   String n=thisCookie.getName();
+ 		   if(n.equals("Shipping_cartId")){
+ 			   shipping_cartId
+ 			    =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }else if(n.equals("Shipping_name")){
+ 			   shipping_name
+ 			   =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }else if(n.equals("Shipping_shippingDate")){
+ 			   shipping_shippingDate
+ 			   =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }else if(n.equals("Shipping_country")){
+ 			   shipping_country
+ 			   =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }else if(n.equals("Shipping_zipCode")){
+ 			   shipping_zipCode
+ 			   =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }else if(n.equals("Shipping_addressName")){
+ 			   shipping_addressName
+ 			   =URLDecoder.decode(thisCookie.getValue(),"utf-8");
+ 		   }
+ 	   }
     }
 %>
+<%@ include file="dbconn.jsp" %>
 <%
+   ArrayList<Product> list 
+    =(ArrayList<Product>)session.getAttribute("cartlist");
+    
+
+    con.setAutoCommit(false);
+    Date saleDate = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    try{
+    	PreparedStatement pstmt =null;
+    for(int i=0;i<list.size();i++){	
+    String sql1="insert into sale(saledate,sessionId,productId,unitprice,saleqty) values(?,?,?,?,?)";
+    pstmt=con.prepareStatement(sql1);
+    
+    pstmt.setString(1,sdf.format(saleDate));
+    pstmt.setString(2, shipping_cartId);
+    pstmt.setString(3,list.get(i).getProductId());
+    pstmt.setInt(4,list.get(i).getUnitPrice());
+    pstmt.setInt(5,list.get(i).getQuantity());
+    
+    pstmt.executeUpdate();
+    }
+    
+    String sql2="insert into delivery(sessionId,name,deliverydate,nation,zipcode,address) values(?,?,?,?,?,?)";
+    pstmt=con.prepareStatement(sql2);
+    pstmt.setString(1,shipping_cartId);
+    pstmt.setString(2,shipping_name);
+    pstmt.setString(3,shipping_shippingDate);
+    pstmt.setString(4,shipping_country);
+    pstmt.setString(5,shipping_zipCode);
+    pstmt.setString(6,shipping_addressName);
+    pstmt.executeUpdate();
+    
+    //db에 반영
+    con.commit();
+    }catch(Exception e){
+    	//이전 상태로 되돌리기
+    	con.rollback();
+    }finally{
+    	con.setAutoCommit(true);
+    }
    //오늘의 과제
    //sale테이블, delivery테이블에 저장,날짜 2020/07/22
 %>
