@@ -108,7 +108,10 @@
 <div class="container">
 	<p><a href="./products.jsp" 
 	     class="btn btn-secondary">&laquo;상품목록</a>
+	   <a href="./salesinfo.jsp" 
+	     class="btn btn-secondary">&laquo;구매내역</a>
 </div>
+
 <%
     //세션정보 삭제
 	session.invalidate();
@@ -128,6 +131,7 @@
     	response.addCookie(thisCookie);
     }
 %>
+
 <jsp:include page="footer.jsp"/>
 
 </body>

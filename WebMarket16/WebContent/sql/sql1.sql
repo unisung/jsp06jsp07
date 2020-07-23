@@ -68,7 +68,12 @@ select *
  where s.sessionId=d.sessionId
    and s.productid=p.p_id;
    
-   
+select * 
+  from sale s,delivery d,product p
+ where s.productId=p.p_id 
+   and s.sessionId=d.sessionId 
+ order by s.seq;   
 
+ select * from product;
 
 
