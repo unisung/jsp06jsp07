@@ -87,6 +87,7 @@
     }catch(Exception e){
     	//이전 상태로 되돌리기
     	con.rollback();
+    	e.printStackTrace();
     }finally{
     	con.setAutoCommit(true);
     }

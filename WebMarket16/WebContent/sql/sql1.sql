@@ -29,8 +29,20 @@ sessionId varchar(50),
 productId varchar(20),
 unitprice int,
 saleqty   int,
+status    int,/*1.결재완료,2.배송접수,3.배송중,4.배송완료,5.수령완료*/
 primary key(seq)
 ) default charset=utf8;
+
+alter table sale add column status int;
+select * from sale;
+update sale set status=1;
+
+select productId,
+       if(status=1,'결재완료','미정'),
+       status
+  from sale;
+  
+  
 
 /*배송테이블*/
 create table delivery(
@@ -47,10 +59,16 @@ primary key(seq)
 
 select * from sale;
 select * from delivery;
+select * from product;
 
 select * 
-  from sale s, delivery d
- where s.sessionId=d.sessionId;
+  from sale s, 
+       delivery d,
+       product p
+ where s.sessionId=d.sessionId
+   and s.productid=p.p_id;
+   
+   
 
 
 
