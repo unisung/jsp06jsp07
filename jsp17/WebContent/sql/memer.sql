@@ -11,3 +11,5 @@ insert into member values('2','1234','일지매');
 
 /* 데이타 조회*/
 select * from member order by id desc;
+
+select id,name,passwd from member;
