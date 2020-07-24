@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<% String contextPath =request.getContextPath();%>
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="<%=contextPath%>/resources/css/bootstrap.min.css"/>
 <title>login </title>
 </head>
 <body>
