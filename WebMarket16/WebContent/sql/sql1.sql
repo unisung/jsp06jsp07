@@ -76,7 +76,7 @@ select *
 
  select * from product;
  
- select * from sale where seq=4;
- update sale set status=2;
+ select * from sale;
+ 
 
 
