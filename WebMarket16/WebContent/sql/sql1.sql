@@ -75,5 +75,8 @@ select *
  order by s.seq;   
 
  select * from product;
+ 
+ select * from sale where seq=4;
+ update sale set status=2;
 
 

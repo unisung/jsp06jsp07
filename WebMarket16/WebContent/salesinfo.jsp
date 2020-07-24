@@ -25,7 +25,7 @@
 	<h1 class="display-3">구매 내역</h1>
 	</div>
 </div>
-<div class="container col-8 alert alert-info" >
+<div class="container col-11 alert alert-info" >
   <div class="text-center">
     <h1>영수증</h1>
   </div>
@@ -74,7 +74,7 @@
     <td class="text-center"><%=rs.getInt("unitPrice")%></td>
     <td class="text-center"><%=total%></td>
     <td class="text-center">
-    <select name="status" id="status<%=seq%>" >
+    <select name="status" id="status<%=seq%>">
     <option value="1" <%=rs.getInt("status")==1?"selected":""%>>결재완료</option>
     <option value="2" <%=rs.getInt("status")==2?"selected":""%>>배송접수</option>
     <option value="3" <%=rs.getInt("status")==3?"selected":""%>>배송중</option>
@@ -105,11 +105,11 @@
 
 <script>
 function updateStatus(seq){
-	var seq=document.getElementById("seq"+seq).value;
+	var no=document.getElementById("seq"+seq).value;
 	var status=document.getElementById("status"+seq).value;
 	var p_id=document.getElementById("pid"+seq).value;
 	alert('구매순번:'+seq+',상품코드:'+p_id+",상태:"+status);
 	location.href
-     ="updateSaleStatus.jsp?seq="+seq+"&id="+p_id+"&status="+status;
+     ="updateSaleStatus.jsp?seq="+no+"&id="+p_id+"&status="+status;
 }
 </script>
