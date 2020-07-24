@@ -18,4 +18,11 @@ regist_day varchar(50),
 primary key(id)
 )default charset=utf8;
 
+select * from member where id='hong';
+select count(*) from member where id='hong';
+
 select * from member;
+
+
+
+

@@ -3,6 +3,13 @@
 <!DOCTYPE html><html><head>
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
 <meta charset="UTF-8">
+<script>
+function idcheck(){//과제
+	var id=document.getElementById("id").value;
+	alert('아이디:'+id);
+	window.open("idcheck.jsp?id="+id);
+}
+</script>
 <title>회원가입</title>
 </head>
 <body>
@@ -19,7 +26,8 @@
 	<div class="form-group row">
 	    <label class="col-sm-2">아이디</label>
 	    <div class="col-sm-3">
-	    	<input name="id" class="form-control" placeholder="id">
+	    	<input name="id" id="id" class="form-control" placeholder="id">
+	    	<input type="button" value="중복확인" class="btn btn-primary" onclick="idcheck()">
 	    </div>
 	</div>
 	<div class="form-group row">
@@ -76,7 +84,7 @@
 	    <label class="col-sm-2">이메일</label>
 	    <div class="col-sm-10">
 	    	<input name="mail1" maxlength="50">@
-	    	<select name="maile2">
+	    	<select name="mail2">
 	    	 <option value="naver.com">naver.com</option>
 	    	 <option value="daum.net">daum.net</option>
 	    	 <option value="gmail.com">gmail.com</option>
