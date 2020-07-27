@@ -158,7 +158,7 @@ function changePass(id){
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <input type="submit" value="회원수정" class="btn btn-primary">
 	      <input type="reset" value="취소" class="btn btn-primary">
-	      <a href="deleteMember.jsp" class="btn btn-primary">회원탈퇴</a>
+	      <a href="javascript:deleteMember();" class="btn btn-primary">회원탈퇴</a>
 	    </div>
 	</div>
 </form>
@@ -167,6 +167,16 @@ function changePass(id){
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>
+<script>
+function deleteMember(){
+	var yesNo=confirm("정말 탈퇴하시겠습니까?");//yes==true,no==false
+	if(yesNo){
+	location.href="deleteMember.jsp";
+	}else{
+		return;
+	}
+}
+</script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function execDaumPostcode() {
