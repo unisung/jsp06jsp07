@@ -7,6 +7,11 @@
 <script>
 $(document).ready(function(){
 	$('#dupCheck').click(function(){
+		if($('#id').val()==''){
+			alert('아이디를 입력하세요');
+			$('#id').focus();
+			return;
+		}
 		$.ajax({
 			type:'GET',//요청메소드 방식
 			url:'idcheckAjax.jsp?id='+$('#id').val(),// val('success')
@@ -20,14 +25,12 @@ $(document).ready(function(){
 				  $('#id').val('');
 				  $('#id').focus();
 				  $('#id').attr('readonly',false);
-				  
 				}else{//사용가능하면  success값
 				  $('#result').removeClass();//동적으로   class제거
 				  $('#result').addClass("badge badge-success");
 				  $('#result').html('사용가능한  id입니다.');	
 				  $('#password').focus();
 				  $('#id').attr('readonly',true);//수정불가처리
-				  
 				}
 			}
 		});
