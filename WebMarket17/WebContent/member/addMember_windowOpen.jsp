@@ -3,36 +3,18 @@
 <!DOCTYPE html><html><head>
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-	$('#dupCheck').click(function(){
-		$.ajax({
-			type:'GET',//요청메소드 방식
-			url:'idcheckAjax.jsp?id='+$('#id').val(),// val('success')
-			dataType:"text",// 요청한 결과 값의 타입
-			success:function(data){//콜백함수
-				alert(data);
-				if($.trim(data)=="fail"){//이미존재하면    fail값
-				  $('#result').removeClass();//동적으로   class제거
-				  $('#result').addClass("badge badge-danger");
-				  $('#result').html('이미 사용중인 id입니다.');
-				  $('#id').val('');
-				  $('#id').focus();
-				  $('#id').attr('readonly',false);
-				  
-				}else{//사용가능하면  success값
-				  $('#result').removeClass();//동적으로   class제거
-				  $('#result').addClass("badge badge-success");
-				  $('#result').html('사용가능한  id입니다.');	
-				  $('#password').focus();
-				  $('#id').attr('readonly',true);//수정불가처리
-				  
-				}
-			}
-		});
-	});
-});
+function idcheck(){//과제
+	var id=document.getElementById("id").value;
+	alert('아이디:'+id);
+	if(id==''){
+		alert('아이디를 입력하세요');
+		document.getElementById("id").focus();
+		return;
+	}
+	window.open("idcheck.jsp?id="+id,"_blank"
+,"toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=500,width=500,height=400");
+}
 </script>
 <title>회원가입</title>
 </head>
@@ -51,9 +33,7 @@ $(document).ready(function(){
 	    <label class="col-sm-2">아이디</label>
 	    <div class="col-sm-3">
 	    	<input name="id" id="id" class="form-control" placeholder="id">
-	    	<input type="button" value="중복확인" class="btn btn-primary"
-	    	 id="dupCheck">
-	    	<label id="result" class="badge badge-success"></label> 
+	    	<input type="button" value="중복확인" class="btn btn-primary" onclick="idcheck()">
 	    </div>
 	</div>
 	<div class="form-group row">
