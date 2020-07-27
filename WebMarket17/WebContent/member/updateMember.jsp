@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html><html><head>
+<script>
+function changePass(id){
+	window.open("passwordChange.jsp?id="+id,"_blank"
+			,"toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=200,width=500,height=400");
+}
+</script>
 <link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
 <%
 	String sessionId=(String)session.getAttribute("sessionId");
@@ -57,6 +63,9 @@
 	    <label class="col-sm-2">비밀번호확인</label>
 	    <div class="col-sm-3">
 	    	<input type="password" name="password_confirm" class="form-control" placeholder="password_confirm">
+	    	<input type="button"  class="btn btn-primary" 
+	    	      value="비밀번호" id="changePassword" 
+	    	   name="changePassword"  onclick="changePass('${row.id}')">
 	    </div>
 	</div>
 	<div class="form-group row">

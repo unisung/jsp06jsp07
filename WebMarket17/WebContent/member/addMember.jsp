@@ -31,11 +31,22 @@ $(document).ready(function(){
 				  $('#result').html('사용가능한  id입니다.');	
 				  $('#password').focus();
 				  $('#id').attr('readonly',true);//수정불가처리
+				  $('#idChecked').val('true');
 				}
 			}
 		});
 	});
 });
+</script>
+<script>
+function checkForm(){
+	//var checked=document.getElementById('idChecked').value;
+	var checked=$('#idChecked').val();
+	if(checked=='false'){
+		alert('아이디 체크를 해주세요');
+		 return false;
+	}
+}
 </script>
 <title>회원가입</title>
 </head>
@@ -56,6 +67,7 @@ $(document).ready(function(){
 	    	<input name="id" id="id" class="form-control" placeholder="id">
 	    	<input type="button" value="중복확인" class="btn btn-primary"
 	    	 id="dupCheck">
+	    	<input type="hidden" id="idChecked" name="idChecked" value='false'>
 	    	<label id="result" class="badge badge-success"></label> 
 	    </div>
 	</div>
