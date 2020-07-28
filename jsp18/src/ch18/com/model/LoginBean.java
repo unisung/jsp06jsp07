@@ -1,5 +1,12 @@
 package ch18.com.model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dao.ConnectionTest1;
+
 public class LoginBean {
 	//속성(property)
 	private String id;
@@ -14,11 +21,22 @@ public class LoginBean {
 	
 	//추가메소드
 	public boolean validate() {
-		if(passwd.equals("admin"))
-			return true;
-		else
-			return false;
+	  ConnectionTest1 conTest=new ConnectionTest1();
+	  Connection con=conTest.getConnection();
+	  String sql="select password from member where id=?";
+	  try {
+		PreparedStatement pstmt=con.prepareStatement(sql);
+		pstmt.setString(1,id);
+		ResultSet rs=pstmt.executeQuery();
+		if(rs.next()) {
+			if(passwd.equals(rs.getString(1)))
+				return true;
+			else
+				return false;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
-	
-
+	return false;
+	}
 }

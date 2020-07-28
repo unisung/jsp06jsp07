@@ -18,4 +18,15 @@
   	<servlet-name>controllerServlet</servlet-name>
   	<url-pattern>/ch18/ControllerServlet</url-pattern>
   </servlet-mapping>
+  
+  <!-- 서블릿 등록 -->
+  <servlet>
+  	<servlet-name>myController2</servlet-name>
+  	<servlet-class>controller.MyController2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>myController2</servlet-name>
+  	<url-pattern>/myRequest</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
