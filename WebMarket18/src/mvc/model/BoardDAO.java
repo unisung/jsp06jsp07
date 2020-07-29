@@ -28,13 +28,15 @@ public class BoardDAO {
 	 
 	 //조회건수 저장 변수 선언
 	 int x=0;
-	 String sql;
+	 String sql="";
 	 //매개변수로 넘어온 검색조건 과 검색내용을 분석하여 쿼리 작성
-	 if(items==null && text==null)//검색조건이 없을 때
-		sql="select count(*) from board";
-	 else//검색조건이 있을 때
-		sql="select count(*) from board where " + items+" like '%"+text+"%'"; 
-	
+	 //검색조건이 없을 때
+		if(items==null || text.trim().length()==0)
+		 sql="select count(*) from board";
+		else //검색조건이 있을 때
+			sql="select count(*) from board where " + items+" like '%"+text+"%'";
+	 System.out.println("sql:"+sql);
+	 
      try {
     	   //DB연결하기
     	   con=DBConnection.getInstance().getConnection();
@@ -73,11 +75,13 @@ public class BoardDAO {
 	  int index=start+1;
 	  
 	  //조건에 따른 쿼리문 생성
-	  String sql;
-	  if(items==null & text==null)
-		  sql="select * from board order by num desc";//최신글 순
-	  else
-		  sql="select * from board where "+items+" like '%"+text+"%' order by num desc";
+	  String sql="";	 
+	  //검색 내용이 없을 때
+	 if(items==null || text.trim().length()==0)
+		sql="select * from board";
+	 else //검색조건이 있을 때
+		sql="select * from board where " + items+" like '%"+text+"%'";
+	  
 	  //view로 보낼 게시글 리스트객체 생성
 	  ArrayList<BoardDTO> list=new ArrayList<BoardDTO>();
 	  try {

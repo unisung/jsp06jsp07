@@ -25,7 +25,7 @@ select count(*) from board where content like '%길동%';
 
 select * from board order by num desc;
 select * from board where content like '%길동%' order by num desc;
-
+select * from board where subject like '%%';
 /* 데이타 입력*/
 insert into board(id,name,subject,content,regist_day,hit,ip) 
 values('hong','홍길동','제목1','내용1','20200729',0,'127.0.0.1');

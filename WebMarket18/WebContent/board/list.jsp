@@ -8,7 +8,20 @@
     int total_record=(Integer)request.getAttribute("total_record");
     int pageNum=(Integer)request.getAttribute("pageNum");
     int total_page=(Integer)request.getAttribute("total_page");
-%>    
+    //검색조건추가에 따른 조건,검색내용 추가 받기
+	String items=(String)request.getAttribute("items");
+	String text=(String)request.getAttribute("text");
+%>
+<script>
+function checkForm(){
+	if(${sessionId==null}){
+		alert("로그인 해주세요");
+		return false;
+	}
+	//writeForm으로 이동
+	location.href="./BoardWriteForm.do?id=<%=sessionId%>";
+}
+</script>    
 <!DOCTYPE html><html><head><meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css"/>
 <title>게시판</title>
@@ -51,7 +64,7 @@
   	 <div align="center">
   	    <c:set var="pageNume" value="<%=pageNum%>"/>
   	    <c:forEach var="i" begin="1" end="<%=total_page%>">
-  	       <a href="<c:url value="./BoardListAction.do?pageNum=${i}"/>">
+  	       <a href="<c:url value="./BoardListAction.do?pageNum=${i}&items=${items}&text=${text}"/>">
   	         <c:choose>
   	           <c:when test="${pageNum==i}">
   	              <font color='4C5317'><b>[${i}]</b></font>
@@ -63,7 +76,25 @@
   	       </a>    
   	    </c:forEach>
   	 </div><%-- 페이지 네비게이션 끝. --%>
-  	 
+  	 <%--검색조건 --%>
+  	 <div>
+  	  <table>
+  	   <tr>
+  	   <td width="100%" align="left">&nbsp;&nbsp;
+  	   <select name="items" class="txt">
+  	    <option value="subject">제목에서</option>
+  	    <option value="content">내용에서</option>  	   
+  	   </select>
+  	   <input type="text" name="text">
+  	   <input type="submit" value="검색" id="btnAdd" class="btn btn-primary">
+  	   </td>
+  	   <td width="100%" align="right">
+  	   <a href="#" onclick="checkForm();"
+  	      class="btn btn-primary">&laquo;글쓰기</a>
+  	   </td>
+  	   </tr>
+  	  </table>
+  	 </div><%--검색조건 끝. --%>
   	 </form>
   	 <hr>
 </div>
