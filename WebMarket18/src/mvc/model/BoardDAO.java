@@ -34,7 +34,7 @@ public class BoardDAO {
 		if(items==null || text.trim().length()==0)
 		 sql="select count(*) from board";
 		else //검색조건이 있을 때
-			sql="select count(*) from board where " + items+" like '%"+text+"%' order by num desc";
+			sql="select count(*) from board where " + items+" like '%"+text+"%'";
 	 System.out.println("sql:"+sql);
 	 
      try {
