@@ -42,7 +42,7 @@ public class BoardController extends HttpServlet {
 	RequestDispatcher rd=null;
 	  if(command.equals("/BoardListAction.do")) { 
 		  //db에서 조회한 글 리스트를 request에 저장
-		 // requestBoardList(request);
+		 requestBoardList(request);
 		  rd =
 	      request.getRequestDispatcher("./board/list.jsp");  
       }else if(command.equals("/BoardWriteFormAction.do")) {
