@@ -34,7 +34,7 @@ public class BoardDAO {
 		if(items==null || text.trim().length()==0)
 		 sql="select count(*) from board";
 		else //검색조건이 있을 때
-			sql="select count(*) from board where " + items+" like '%"+text+"%'";
+			sql="select count(*) from board where " + items+" like '%"+text+"%' order by num desc";
 	 System.out.println("sql:"+sql);
 	 
      try {
@@ -78,9 +78,9 @@ public class BoardDAO {
 	  String sql="";	 
 	  //검색 내용이 없을 때
 	 if(items==null || text.trim().length()==0)
-		sql="select * from board";
+		sql="select * from board order by num desc";
 	 else //검색조건이 있을 때
-		sql="select * from board where " + items+" like '%"+text+"%'";
+		sql="select * from board where " + items+" like '%"+text+"%' order by num desc";
 	  
 	  //view로 보낼 게시글 리스트객체 생성
 	  ArrayList<BoardDTO> list=new ArrayList<BoardDTO>();
