@@ -7,11 +7,11 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
 
 
@@ -40,16 +40,9 @@ public class BoardController extends HttpServlet {
 	
 	/* 요청command에 따른 분기작업 */
 	RequestDispatcher rd=null;
-	/*
-	 * switch(command) { 
-	 * case "/BoardListAction.do": rd =
-	 *      request.getRequestDispatcher("./board/list.jsp"); 
-	 *      break; 
-	 *  }
-	 */
 	  if(command.equals("/BoardListAction.do")) { 
 		  //db에서 조회한 글 리스트를 request에 저장
-		  requestBoardList(request);
+		 // requestBoardList(request);
 		  rd =
 	      request.getRequestDispatcher("./board/list.jsp");  
       }else if(command.equals("/BoardWriteFormAction.do")) {
