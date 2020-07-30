@@ -1,3 +1,4 @@
+<%@page import="dto.Product"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -40,6 +41,13 @@
     %>
  </div>
 <hr>
+</div>
+<div style="width:100px;height: 100px; position:fixed; top: 100px; right: 10px; border: 1px solid black;">
+ <% List<Product> cartList 
+ =(List<Product>)session.getAttribute("cartlist");
+ 
+if(cartList==null) cartList = new ArrayList<Product>(); %> 
+  <a href="cart.jsp">장바구니:<%=cartList.size()%></a>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>
