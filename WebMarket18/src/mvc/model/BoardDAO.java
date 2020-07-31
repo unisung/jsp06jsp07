@@ -123,4 +123,33 @@ public class BoardDAO {
    }
 	return list;//조회 리스트 리턴
 	}
+	
+	public String getNameById(String id) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String name="";
+		try {
+			  con=DBConnection.getInstance().getConnection();
+			  String sql="select name from member where id=?";
+			  pstmt=con.prepareStatement(sql);
+			  pstmt.setString(1,id);
+			  rs=pstmt.executeQuery();
+			  
+			  if(rs.next()) {
+				  name=rs.getString(1);
+			  }
+		}catch(Exception e) {
+			System.out.println("getNameById()에러:"+e);
+		}finally {// 
+	   	 try {//자원해제 처리
+			 if(rs!=null) rs.close();
+			 if(pstmt!=null) pstmt.close();
+			 if(con!=null)con.close();
+		 }catch(Exception e) {
+			 throw new RuntimeException(e.getMessage());
+		 }
+	   }
+  	return name;
+  }
 }

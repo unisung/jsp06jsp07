@@ -19,7 +19,7 @@ function checkForm(){
 		return false;
 	}
 	//writeForm으로 이동
-	location.href="./BoardWriteForm.do?id=<%=sessionId%>";
+	location.href="./BoardWriteFormAction.do?id=<%=sessionId%>";
 }
 </script>    
 <!DOCTYPE html><html><head><meta charset="UTF-8">

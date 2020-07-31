@@ -42,10 +42,11 @@ public class BoardController extends HttpServlet {
 	RequestDispatcher rd=null;
 	  if(command.equals("/BoardListAction.do")) { 
 		  //db에서 조회한 글 리스트를 request에 저장
-		 requestBoardList(request);
+		  requestBoardList(request);
 		  rd =
 	      request.getRequestDispatcher("./board/list.jsp");  
       }else if(command.equals("/BoardWriteFormAction.do")) {
+    	  requestGetName(request);
     	  rd=
     	  request.getRequestDispatcher("./board/writeForm.jsp");
       }else if(command.equals("/BoardWriteAction.do")) {
@@ -56,6 +57,13 @@ public class BoardController extends HttpServlet {
     	  request.getRequestDispatcher("/BoardListAction.do");
       }
 	  rd.forward(request, response);
+	}
+
+	private void requestGetName(HttpServletRequest request) {
+		String id=request.getParameter("id");
+		BoardDAO dao=BoardDAO.getInstance();
+		String name=dao.getNameById(id);
+		request.setAttribute("name",name);
 	}
 
 	//등록된 글 목록 가져오기 - 한페이지당 5개의 글 출력
