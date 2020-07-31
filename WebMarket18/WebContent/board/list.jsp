@@ -24,6 +24,9 @@ function checkForm(){
 </script>    
 <!DOCTYPE html><html><head><meta charset="UTF-8">
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>게시판</title>
 </head>
 <body>
@@ -63,18 +66,25 @@ function checkForm(){
   	 <%-- 페이지 네비게이션 --%>
   	 <div align="center">
   	    <c:set var="pageNume" value="<%=pageNum%>"/>
+  	<ul class="pagination pagination-xs">
+  	  <li class="previous"><a href="#">Previous</a></li>
   	    <c:forEach var="i" begin="1" end="<%=total_page%>">
-  	       <a href="<c:url value="./BoardListAction.do?pageNum=${i}&items=${items}&text=${text}"/>">
+  	       <li <c:if test="${pageNum==i}">class='active'</c:if>><a href="<c:url value="./BoardListAction.do?pageNum=${i}&items=${items}&text=${text}"/>">
   	         <c:choose>
   	           <c:when test="${pageNum==i}">
-  	              <font color='4C5317'><b>[${i}]</b></font>
+  	              <font color='4C5317'><b>${i}</b></font>
   	           </c:when>
   	           <c:otherwise>
-  	           		<font color='4C5317'>[${i}]</font>
+  	           		<font color='4C5317'>${i}</font>
   	           </c:otherwise>
   	         </c:choose>
-  	       </a>    
+  	       </a>
+  	       </li>    
   	    </c:forEach>
+  	  <li class="next"><a href="#">Next</a></li>
+    </ul>
+    
+
   	 </div><%-- 페이지 네비게이션 끝. --%>
   	 <%--검색조건 --%>
   	 <div>
