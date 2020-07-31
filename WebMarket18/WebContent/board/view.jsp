@@ -39,8 +39,10 @@ action="BoardUpdateAction.do?num=<%=board.getNum()%>&pageNum=<%=nowPage%>"
 	  </div>
 	  <div class="form-group row">
 	      <label class="col-sm-2 control-label">내용</label>
-	      <div class="col-sm-8">
-	      	   <textarea rows="5" cols="80" name="content" class="form-control" placeholder="content"><%=board.getContent()%></textarea>
+	      <div class="col-sm-8" style="word-break:break-all;">
+	      	 <textarea rows="5" cols="80" 
+	      	 name="content" class="form-control" 
+	       placeholder="content"><%=board.getContent()%></textarea>
 	      </div>
 	  </div>
 	  
