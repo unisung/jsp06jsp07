@@ -58,10 +58,32 @@ public class BoardController extends HttpServlet {
     	  rd=
 					/* request.getRequestDispatcher("./board/list.jsp"); */
     	  request.getRequestDispatcher("/BoardListAction.do");
+      }else if(command.equals("/BoardViewAction.do")) {//선택된 글 상세페이지
+    	 requestBoardView(request);
+    	 rd=request.getRequestDispatcher("/BoardView.do");
+      }else if(command.equals("/BoardView.do")) {//글 상세페이지 출력
+    	  rd=request.getRequestDispatcher("./board/view.jsp"); 
       }
 	  rd.forward(request, response);
 	}
 	
+	//글 상세 페이지 가져오기
+	private void requestBoardView(HttpServletRequest request) {
+	BoardDAO dao=BoardDAO.getInstance();
+	//리스트로 되돌갈때 원래 페이지로 가기위한 값
+	int num=Integer.parseInt(request.getParameter("num"));
+	int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+	
+	//db에서 정보 얻기
+	BoardDTO board=new BoardDTO();
+	board=dao.getBoardByNum(num,pageNum);
+	
+	//view로 정보를 넘기기위한 설정
+	request.setAttribute("num", num);
+	request.setAttribute("page", pageNum);
+	request.setAttribute("board", board);
+	}
+
 	//새글 등록 메소드
 	private void requestBoardWrite(HttpServletRequest request) {
 		//DB저장객체 생성

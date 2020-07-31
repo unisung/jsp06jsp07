@@ -183,4 +183,42 @@ public class BoardDAO {
 		 }
 	   }
 	}
+	
+	//board정보 리턴
+	public BoardDTO getBoardByNum(int num, int pageNum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		BoardDTO board=null;
+		try {
+			  con=DBConnection.getInstance().getConnection();
+			  String sql="select * from board where num=?";
+			  pstmt=con.prepareStatement(sql);
+			  pstmt.setInt(1,num);
+			  rs=pstmt.executeQuery();
+			  
+			  if(rs.next()) {
+				  board=new BoardDTO();
+				  board.setNum(rs.getInt("num"));
+				  board.setId(rs.getString("id"));
+				  board.setName(rs.getString("name"));
+				  board.setSubject(rs.getString("subject"));
+				  board.setContent(rs.getString("content"));
+				  board.setRegist_day(rs.getString("regist_day"));
+				  board.setHit(rs.getInt("hit"));
+				  board.setIp(rs.getString("ip"));
+			  }
+		}catch(Exception e) {
+			System.out.println("getBoardByNum()에러:"+e);
+		}finally {// 
+	   	 try {//자원해제 처리
+			 if(rs!=null) rs.close();
+			 if(pstmt!=null) pstmt.close();
+			 if(con!=null)con.close();
+		 }catch(Exception e) {
+			 throw new RuntimeException(e.getMessage());
+		 }
+	   }
+		return board;// board리턴
+	}
 }
