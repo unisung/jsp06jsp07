@@ -152,4 +152,35 @@ public class BoardDAO {
 	   }
   	return name;
   }
+	public void insertBoard(BoardDTO board) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			  con=DBConnection.getInstance().getConnection();
+	String sql="insert into board(id,name,subject,content,regist_day,hit,ip) values(?,?,?,?,?,?,?)";
+	          //쿼리객체 새성
+			  pstmt=con.prepareStatement(sql);		  
+	          //파라미터 설정
+	          pstmt.setString(1, board.getId());
+			  pstmt.setString(2, board.getName());
+			  pstmt.setString(3, board.getSubject());
+			  pstmt.setString(4, board.getContent());
+			  pstmt.setString(5, board.getRegist_day());
+			  pstmt.setInt(6, board.getHit());
+			  pstmt.setString(7,board.getIp());
+			  
+			  //update실행
+			  pstmt.executeUpdate();
+			  
+		}catch(Exception e) {
+			System.out.println("insertBoard()에러:"+e);
+		}finally {// 
+	   	 try {//자원해제 처리
+			 if(pstmt!=null) pstmt.close();
+			 if(con!=null)con.close();
+		 }catch(Exception e) {
+			 throw new RuntimeException(e.getMessage());
+		 }
+	   }
+	}
 }
