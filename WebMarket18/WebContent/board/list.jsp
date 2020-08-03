@@ -11,6 +11,12 @@
     //검색조건추가에 따른 조건,검색내용 추가 받기
 	String items=(String)request.getAttribute("items");
 	String text=(String)request.getAttribute("text");
+	
+	//
+  int currentBlock=(Integer)request.getAttribute("currentBlock");
+  int startPage=(Integer)request.getAttribute("startPage");
+  int endPage=(Integer)request.getAttribute("endPage");
+  int total_segment=(Integer)request.getAttribute("total_segment");
 %>
 <script>
 function checkForm(){
@@ -64,11 +70,25 @@ function checkForm(){
   	 </table>
   	 </div><%--리스트 끝 --%>
   	 <%-- 페이지 네비게이션 --%>
+  	<c:set var ="pageNum" value='<%=pageNum%>'/>
+  	<c:set var="total_page" value='<%=total_page %>'/>
+  	<c:set var="startPage" value='<%=startPage %>'/>
+  	<c:set var="endPage" value='<%=endPage%>'/>
+  	<c:set var="total_segment" value='<%=total_segment%>'/>
+  	<c:set var="currentBlock" value='<%=currentBlock%>'/>
+  	 
   	 <div align="center">
   	    <c:set var="pageNume" value="<%=pageNum%>"/>
   	<ul class="pagination pagination-xs">
-  	  <li class="previous"><a href="#">Previous</a></li>
-  	    <c:forEach var="i" begin="1" end="<%=total_page%>">
+  	<%-- 이전 세그먼트 블록으로 이동 --%>
+  	  <c:if test="${currentBlock<=1}">
+  	  	<li class="previous disabled"><a href="#">Previous</a></li>
+  	  </c:if>
+  	  <c:if test="${currentBlock>1}">
+  	    <li class="previous"><a href="<c:url value="./BoardListAction.do?pageNum=${startPage-1}&items=${items}&text=${text}"/>">Previous</a></li>
+  	  </c:if>
+    <%-- 현재 세그먼트 블록내에서의 페이지 리스트 --%>
+  	    <c:forEach var="i" begin="${startPage}" end="${endPage}">
   	       <li <c:if test="${pageNum==i}">class='active'</c:if>><a href="<c:url value="./BoardListAction.do?pageNum=${i}&items=${items}&text=${text}"/>">
   	         <c:choose>
   	           <c:when test="${pageNum==i}">
@@ -81,11 +101,19 @@ function checkForm(){
   	       </a>
   	       </li>    
   	    </c:forEach>
-  	  <li class="next"><a href="#">Next</a></li>
+  	 <%-- 다음 세그먼트 블록으로 이동 처리 --%>
+  	 <c:if test="${currentBlock<total_segment}">
+  	 	 <li class="next">
+  	 	 <a href="<c:url value="./BoardListAction.do?pageNum=${endPage+1}&items=${items}&text=${text}"/>">Next</a>
+  	 	 </li>
+  	 </c:if>
+  	 <c:if test="${currentBlock>=total_segment}">
+  	  <li class="next disabled"><a href="#">Next</a></li>
+  	 </c:if>   
     </ul>
-    
-
   	 </div><%-- 페이지 네비게이션 끝. --%>
+  	 
+  	 
   	 <%--검색조건 --%>
   	 <div>
   	  <table>

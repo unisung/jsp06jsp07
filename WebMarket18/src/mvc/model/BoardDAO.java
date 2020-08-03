@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import mvc.database.DBConnection;
 
 /*data access Object */
@@ -190,6 +192,8 @@ public class BoardDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		BoardDTO board=null;
+		//조회수 증가 처리
+		updateHit(num);
 		try {
 			  con=DBConnection.getInstance().getConnection();
 			  String sql="select * from board where num=?";
@@ -221,6 +225,35 @@ public class BoardDAO {
 	   }
 		return board;// board리턴
 	}
+	
+	//조회수 증가 메소드
+	public void updateHit(int num) {
+		//db연결객체 생성
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			 //db연결하기
+			 con=DBConnection.getInstance().getConnection();
+			 //쿼리문 작성
+			 String sql="update board set hit=hit+1 where num=?";
+			 //쿼리객체 생성
+			 pstmt=con.prepareStatement(sql);
+			 //바인딩변수처리
+			 pstmt.setInt(1, num);
+			 //dbupdate처리
+			 pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("updateHit()에러:"+e);
+		}finally {
+		  try {
+			  if(pstmt!=null) pstmt.close();
+			  if(con!=null)con.close();
+		  }catch(Exception e) {
+			  throw new RuntimeException(e.getMessage());
+		  }
+		}
+	}
+	
 	//글내용수정 메소드
 	public void updateBoard(BoardDTO board) {
 		Connection con=null;
@@ -250,5 +283,31 @@ public class BoardDAO {
 			 throw new RuntimeException(e.getMessage());
 		 }
 	   }
+	}
+	//db에서 해당 글번호로 삭제처리
+   public void deleteBoard(int num) {
+     //DB연결객체 생성
+	  Connection con=null;
+	  PreparedStatement pstmt=null;
+	  try {
+		  //db연결하기
+		  con=DBConnection.getInstance().getConnection();
+		  String sql="delete from board where num=?";
+		  //쿼리객체 생성
+		  pstmt=con.prepareStatement(sql);
+		  //바인딩변수 설정
+		  pstmt.setInt(1,num);
+		  //삭제 쿼리 실행
+		  pstmt.executeUpdate();
+	  }catch(Exception e) {
+		  System.out.println("deleteBoard()오류발생:"+e);
+	  }finally {//자원해제 처리 
+		 try {
+			 if(pstmt!=null) pstmt.close();
+			 if(con!=null) con.close();
+		 }catch(Exception e) {
+			 throw new RuntimeException(e.getMessage());
+		 }
+	  }
 	}
 }

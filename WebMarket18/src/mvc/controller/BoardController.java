@@ -67,10 +67,27 @@ public class BoardController extends HttpServlet {
 		  //update내용db에 저장하기
     	  requestBoardUpdate(request);
     	  rd=request.getRequestDispatcher("/BoardListAction.do"); 
+	}else if(command.equals("/BoardDeleteAction.do")) {
+		//삭제처리
+		  requestBoardDelete(request);
+		//게시글 리스트로 이동
+		rd=request.getRequestDispatcher("/BoardListAction.do");
 	}
 	  rd.forward(request, response);
 	}
 	
+  //게시글 삭제메소드
+  private void requestBoardDelete(HttpServletRequest request) {
+  //request로 넘어온 파라미터 처리
+   int num=Integer.parseInt(request.getParameter("num"));
+   int pageNum=Integer.parseInt(request.getParameter("pageNum"));
+	
+   //db에서 삭제 처리
+   BoardDAO dao=BoardDAO.getInstance();
+   dao.deleteBoard(num);
+		
+	}
+
 	//update정보 db에 저장하기
 	private void requestBoardUpdate(HttpServletRequest request) {
 		BoardDAO dao=BoardDAO.getInstance();
@@ -187,6 +204,21 @@ public class BoardController extends HttpServlet {
 		 total_page = total_page+1;//자투리가 있는 경우 한페이 추가
 	 }
 	 
+	 // segment단위로 페이지 처리하기
+	 int pageLength=5;//한 화면에 5개페이지씩 보이도록 설정
+	 int currentBlock=pageNum%pageLength==0?pageNum/pageLength:(pageNum/pageLength)+1;
+	 
+	 //현재 화면에 보여지는 페이지의 첫재페이지번호
+	 int startPage=1+(currentBlock-1)*pageLength;//1,6
+	 int endPage = startPage + pageLength -1;//5,10,
+	 int total_segment=
+  (total_record%(limit*pageLength)==0)?
+    total_record/(limit*pageLength):
+	 (total_record/(limit*pageLength)+1);
+	 
+	 //글 조회후 마지막페이지 보정
+	 endPage=endPage>total_page?total_page:endPage;
+	 
 	 //결과를 view에 전달하기위해 request에 저장
 	 request.setAttribute("pageNum", pageNum);// 페이지번호
 	 request.setAttribute("total_page", total_page);// 전체 페이지 수
@@ -195,5 +227,10 @@ public class BoardController extends HttpServlet {
      //검색조건추가에 따른 조건,검색내용 추가 전달
 	 request.setAttribute("items", items);
 	 request.setAttribute("text", text);
+	 //segment처리 파라미터 설정
+	 request.setAttribute("currentBlock", currentBlock);//현재화면의 블럭
+	 request.setAttribute("startPage",startPage);//현재화면의 시작페이지
+	 request.setAttribute("endPage",endPage);//현재화면의 끝페이지
+	 request.setAttribute("total_segment",total_segment);//전체 블럭수
 	}
 }

@@ -6,6 +6,14 @@
   int num=(Integer)request.getAttribute("num");
   int nowPage=(Integer)request.getAttribute("page");
 %>
+<script>
+function deleteConfirm(num,pageNum){
+	var yesno=confirm(num+"번 글을 삭제할까요?");
+	if(yesno){
+		location.href='./BoardDeleteAction.do?num='+num+'&pageNum='+pageNum;
+	}
+}
+</script>
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <link rel="stylesheet" 
@@ -51,7 +59,7 @@ action="BoardUpdateAction.do?num=<%=board.getNum()%>&pageNum=<%=nowPage%>"
 	       <c:set var="userId" value="<%=board.getId() %>"/>
 	       <c:if test="${sessionId==userId}">
 	         <p>
-	         <a href="./BoardDeleteAction.do?num=<%=board.getNum()%>&pageNum=<%=nowPage%>"
+	         <a href="javascript:deleteConfirm('<%=board.getNum()%>','<%=nowPage%>')"
 	                     class="btn btn-danger">삭제</a>
 	      	   <input type="submit" class="btn btn-success" value="수정">
 	      	   <input type="reset" class="btn btn-primary" value="취소">
