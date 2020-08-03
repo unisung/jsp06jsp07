@@ -45,8 +45,11 @@ public class BoardController extends HttpServlet {
 	  if(command.equals("/BoardListAction.do")) { 
 		  //db에서 조회한 글 리스트를 request에 저장
 		  requestBoardList(request);
+		  System.out.println("경로:"+"http://localhost:8080"+contextPath+"/board/list.jsp");
+		  String path="http://localhost:8080"+contextPath+"/board/list.jsp";
+		  System.out.println("path:"+path);
 		  rd =
-	      request.getRequestDispatcher("./board/list.jsp");  
+	      request.getRequestDispatcher(path);  
       }else if(command.equals("/BoardWriteFormAction.do")) {
     	  requestGetName(request);
     	  rd=
