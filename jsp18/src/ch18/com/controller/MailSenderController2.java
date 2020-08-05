@@ -80,16 +80,16 @@ for (int i = 0; i < 20; i++) {
 		
 	    // SMTP 서버 설정
 	    final String host = "smtp.gmail.com"; // 사용할 smtp host, naver라면 smtp.naver.com
-	    final String accountId = "javavora@gmail.com";
-	    final String accountPwd = "googleVctor7!";
+	    final String accountId = "메일계정";
+	    final String accountPwd = "메일비밀번호";
 	    final int port = 465; // SMTP 포트
 	     
 	    String receiver = email; // 받는사람 이메일
-	    String sender = "javavora@gmail.com"; // 보내는사람 이메일
+	    String sender = "메일계정"; // 보내는사람 이메일
 	     
 	    // Property 정보 생성
 	    Properties props = System.getProperties();
-	    props.put("mail.smtp.user", "javavora@gmail.com");
+	    props.put("mail.smtp.user", sender);
 	    props.put("mail.smtp.host", host);
 	    props.put("mail.smtp.port", port);
 	    props.put("mail.smtp.auth", "true");

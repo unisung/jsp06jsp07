@@ -35,9 +35,6 @@ public class MailSencerController extends HttpServlet {
 	}
 
 	public void mailSender(HttpServletRequest request) throws AddressException, MessagingException{
-	    //String subject = (String) request.getParameter("subject"); // 메일 제목
-	    //String message = (String) request.getParameter("message"); // 메일 내용
-	     
 		String subject="test메일";
 		String message="test메일내용";
 		
