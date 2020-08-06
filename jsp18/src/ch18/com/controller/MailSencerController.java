@@ -40,16 +40,16 @@ public class MailSencerController extends HttpServlet {
 		
 	    // SMTP 서버 설정
 	    final String host = "smtp.gmail.com"; // 사용할 smtp host, naver라면 smtp.naver.com
-	    final String accountId = "javavora@gmail.com";
-	    final String accountPwd = "googleVctor7!";
+	    final String accountId = "";
+	    final String accountPwd = "";
 	    final int port = 465; // SMTP 포트
 	     
-	    String receiver = "vctor@naver.com"; // 받는사람 이메일
-	    String sender = "javavora@gmail.com"; // 보내는사람 이메일
+	    String receiver = ""; // 받는사람 이메일
+	    String sender = ""; // 보내는사람 이메일
 	     
 	    // Property 정보 생성
 	    Properties props = System.getProperties();
-	    props.put("mail.smtp.user", "javavora@gmail.com");
+	    props.put("mail.smtp.user", sender);
 	    props.put("mail.smtp.host", host);
 	    props.put("mail.smtp.port", port);
 	    props.put("mail.smtp.auth", "true");
