@@ -17,7 +17,7 @@ import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
 
 
-public class BoardController extends HttpServlet {
+public class BoardController3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     static final int LISTCOUNT=5;
 	
@@ -58,12 +58,12 @@ public class BoardController extends HttpServlet {
 		  view=action.command(request, response);
     	  
       }else if(command.equals("/BoardViewAction.do")) {//선택된 글 상세페이지
-    	  Command action=new BoardViewAction();
+    	  Command action=new BoardWriteAction();
 		  view=action.command(request, response);
     	 
     	 
       }else if(command.equals("/BoardView.do")) {//글 상세페이지 출력
-    	  Command action=new BoardView();
+    	  Command action=new BoardWriteAction();
 		  view=action.command(request, response);
     	 
     	  
