@@ -11,7 +11,7 @@ public class BoardViewAction implements Command {
 	@Override
 	public String command(HttpServletRequest request, HttpServletResponse response) {
 		requestBoardView(request);
-		return null;
+		return "/BoardView.do";
 	}
 	//글 상세 페이지 가져오기
 		private void requestBoardView(HttpServletRequest request) {

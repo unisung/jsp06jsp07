@@ -49,6 +49,10 @@
  <servlet>
  	<servlet-name>BoardController</servlet-name>
  	<servlet-class>mvc.controller.BoardController</servlet-class>
+ 	<init-param>
+ 	  <param-name>config</param-name>
+ 	  <param-value>C:\Users\admin\git\jsp06jsp07\WebMarket18\src\actioncommand.properties</param-value>
+ 	</init-param>
  </servlet>
  <servlet-mapping>
  	<servlet-name>BoardController</servlet-name>

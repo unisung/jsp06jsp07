@@ -9,7 +9,7 @@ public class BoardWriteFormAction implements Command {
 	@Override
 	public String command(HttpServletRequest request, HttpServletResponse response) {
 		requestGetName(request);
-		return "/BoardView.do";
+		return "./board/writeForm.jsp";
 	}
 	private void requestGetName(HttpServletRequest request) {
 		String id=request.getParameter("id");
